@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vigi — Copywriter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f2ed;
+      --white: #faf8f5;
+      --black: #0f0f0e;
+      --mid: #6b6760;
+      --faint: #dedad4;
+      --red: #d13b1e;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Instrument Serif', serif;
+      --display: 'Unbounded', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--black);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+      height: 56px;
+    }
+
+    .nav-name {
+      font-family: var(--display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+
+    .hero {
+      padding: 100px 48px 80px;
+      border-bottom: 1px solid var(--faint);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      min-height: 52vh;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(42px, 5.5vw, 80px);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.2s forwards;
+    }
+
+    .hero-title em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--red);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 24px;
+      padding-bottom: 6px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-desc {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--mid);
+      max-width: 320px;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--faint);
+      padding: 8px 14px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+      height: 48px;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .section-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .section-count {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--faint);
+      letter-spacing: 0.1em;
+    }
+
+    /* Featured film */
+    .film-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--faint);
+      min-height: 340px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .featured-visual {
+      background: #1a1814;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .film-featured:hover .featured-visual { transform: scale(1.01); }
+
+    .featured-placeholder-num {
+      font-family: var(--display);
+      font-size: 110px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .featured-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .featured-play svg {
+      width: 52px;
+      height: 52px;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+    }
+
+    .film-featured:hover .featured-play svg { opacity: 1; }
+
+    .featured-info {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-left: 1px solid var(--faint);
+    }
+
+    .featured-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+
+    .featured-title {
+      font-family: var(--display);
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .featured-brand {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .featured-role {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--mid);
+    }
+
+    /* Film rows */
+    .film-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 300px 120px;
+      align-items: center;
+      border-bottom: 1px solid var(--faint);
+      padding: 0 48px;
+      min-height: 84px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .film-row:hover { background: var(--white); }
+    .film-row:hover .film-row-num { color: var(--red); }
+
+    .film-row-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--faint);
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .film-row-brand {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+
+    .film-row-title {
+      font-family: var(--display);
+      font-size: clamp(16px, 1.8vw, 24px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      line-height: 1.1;
+    }
+
+    .film-row-thumb-placeholder {
+      width: 280px;
+      height: 56px;
+      background: var(--faint);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .film-row:hover .film-row-thumb-placeholder { opacity: 1; }
+
+    .thumb-inner {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .play-icon { width: 16px; height: 16px; }
+
+    .film-row-role {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-align: right;
+    }
+
+    /* Print */
+    .print-note-row {
+      padding: 32px 48px;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .print-note-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .print-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .print-card {
+      border-right: 1px solid var(--faint);
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: var(--white);
+    }
+
+    .print-card:last-child { border-right: none; }
+
+    .print-card::after {
+      content: '';
+      display: block;
+      padding-top: 140%;
+    }
+
+    .print-card-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .print-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .print-add { font-size: 20px; color: var(--faint); }
+
+    .print-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .print-card:hover .print-img { transform: scale(1.04); }
+
+    .print-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px;
+      background: rgba(245,242,237,0.92);
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .print-card:hover .print-caption { opacity: 1; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(15,15,14,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 40px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.4);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--bg); }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .about-left {
+      padding: 72px 48px;
+      border-right: 1px solid var(--faint);
+    }
+
+    .about-name {
+      font-family: var(--display);
+      font-size: clamp(48px, 6vw, 86px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: var(--black);
+      margin-bottom: 40px;
+    }
+
+    .about-name span {
+      display: block;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.62em;
+      font-weight: 400;
+      color: var(--red);
+      letter-spacing: 0;
+    }
+
+    .about-bio {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--mid);
+      max-width: 440px;
+    }
+
+    .about-bio p + p { margin-top: 20px; }
+
+    .about-right {
+      padding: 72px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-block { display: flex; flex-direction: column; gap: 32px; }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 6px;
+    }
+
+    .contact-value {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    .contact-value a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--faint);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-value a:hover { color: var(--red); border-color: var(--red); }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--faint);
+      padding: 10px 16px;
+      align-self: flex-start;
+    }
+
+    .avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4caf50;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    footer {
+      border-top: 1px solid var(--faint);
+      padding: 0 48px;
+      height: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-l {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav, .section-header, .print-note-row, footer { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; padding: 80px 24px 60px; min-height: auto; gap: 40px; }
+      .hero-right { align-items: flex-start; }
+      .hero-desc { text-align: left; }
+      .film-row { grid-template-columns: 48px 1fr 80px; padding: 0 24px; }
+      .film-row-thumb-placeholder { display: none; }
+      .film-featured { grid-template-columns: 1fr; }
+      .featured-visual { min-height: 220px; }
+      .featured-info { padding: 28px 24px; border-left: none; border-top: 1px solid var(--faint); }
+      .print-grid { grid-template-columns: repeat(3, 1fr); }
+      .print-note-row { padding: 24px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-left { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--faint); }
+      .about-right { padding: 48px 24px; }
+    }
+
+    @media (max-width: 540px) {
+      .film-row { grid-template-columns: 40px 1fr; }
+      .film-row-role { display: none; }
+      .print-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">Vigi</span>
+    <ul class="nav-links">
+      <li><a href="#films">Films</a></li>
+      <li><a href="#print">Print</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Advertising Copywriter — Bangalore</p>
+      <h1 class="hero-title">Ideas<br>that<br><em>move.</em></h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">Campaigns and films for brands that want to be felt, not just noticed.</p>
+      <span class="hero-tag">Available for Freelance</span>
+    </div>
+  </div>
+
+  <div class="section-header" id="films">
+    <span class="section-title">Films</span>
+    <span class="section-count">06 works</span>
+  </div>
+
+  <!-- Featured -->
+  <a class="film-featured" href="https://www.youtube.com/watch?v=REPLACE_ME_1" target="_blank" rel="noopener">
+    <div class="featured-visual">
+      <span class="featured-placeholder-num">01</span>
+      <!-- Replace placeholder with real thumbnail:
+      <img src="https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7" alt="">
+      -->
+      <div class="featured-play">
+        <svg viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="25" stroke="white" stroke-width="1"/>
+          <polygon points="21,16 40,26 21,36" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="featured-info">
+      <p class="featured-label">Featured</p>
+      <h2 class="featured-title">Campaign Title<br>Goes Here</h2>
+      <p class="featured-brand">Brand Name · 2024</p>
+      <p class="featured-role">Concept &amp; Copy</p>
+    </div>
+  </a>
+
+  <!-- Rows -->
+  <a class="film-row" href="https://www.youtube.com/watch?v=REPLACE_ME_2" target="_blank" rel="noopener">
+    <span class="film-row-num">(02)</span>
+    <div>
+      <p class="film-row-brand">Brand Name · 2023</p>
+      <h3 class="film-row-title">Campaign Title</h3>
+    </div>
+    <div class="film-row-thumb-placeholder">
+      <div class="thumb-inner">
+        <svg class="play-icon" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7.5" stroke="#6b6760" stroke-width="0.8"/>
+          <polygon points="6.5,5 12,8 6.5,11" fill="#6b6760"/>
+        </svg>
+        Watch on YouTube
+      </div>
+    </div>
+    <span class="film-row-role">Copy</span>
+  </a>
+
+  <a class="film-row" href="https://www.youtube.com/watch?v=REPLACE_ME_3" target="_blank" rel="noopener">
+    <span class="film-row-num">(03)</span>
+    <div>
+      <p class="film-row-brand">Brand Name · 2023</p>
+      <h3 class="film-row-title">Campaign Title</h3>
+    </div>
+    <div class="film-row-thumb-placeholder">
+      <div class="thumb-inner">
+        <svg class="play-icon" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7.5" stroke="#6b6760" stroke-width="0.8"/>
+          <polygon points="6.5,5 12,8 6.5,11" fill="#6b6760"/>
+        </svg>
+        Watch on YouTube
+      </div>
+    </div>
+    <span class="film-row-role">Concept &amp; Copy</span>
+  </a>
+
+  <a class="film-row" href="https://www.youtube.com/watch?v=REPLACE_ME_4" target="_blank" rel="noopener">
+    <span class="film-row-num">(04)</span>
+    <div>
+      <p class="film-row-brand">Brand Name · 2022</p>
+      <h3 class="film-row-title">Campaign Title</h3>
+    </div>
+    <div class="film-row-thumb-placeholder">
+      <div class="thumb-inner">
+        <svg class="play-icon" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7.5" stroke="#6b6760" stroke-width="0.8"/>
+          <polygon points="6.5,5 12,8 6.5,11" fill="#6b6760"/>
+        </svg>
+        Watch on YouTube
+      </div>
+    </div>
+    <span class="film-row-role">Copy</span>
+  </a>
+
+  <a class="film-row" href="https://www.youtube.com/watch?v=REPLACE_ME_5" target="_blank" rel="noopener">
+    <span class="film-row-num">(05)</span>
+    <div>
+      <p class="film-row-brand">Brand Name · 2022</p>
+      <h3 class="film-row-title">Campaign Title</h3>
+    </div>
+    <div class="film-row-thumb-placeholder">
+      <div class="thumb-inner">
+        <svg class="play-icon" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7.5" stroke="#6b6760" stroke-width="0.8"/>
+          <polygon points="6.5,5 12,8 6.5,11" fill="#6b6760"/>
+        </svg>
+        Watch on YouTube
+      </div>
+    </div>
+    <span class="film-row-role">Concept &amp; Copy</span>
+  </a>
+
+  <a class="film-row" href="https://www.youtube.com/watch?v=REPLACE_ME_6" target="_blank" rel="noopener">
+    <span class="film-row-num">(06)</span>
+    <div>
+      <p class="film-row-brand">Brand Name · 2021</p>
+      <h3 class="film-row-title">Campaign Title</h3>
+    </div>
+    <div class="film-row-thumb-placeholder">
+      <div class="thumb-inner">
+        <svg class="play-icon" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7.5" stroke="#6b6760" stroke-width="0.8"/>
+          <polygon points="6.5,5 12,8 6.5,11" fill="#6b6760"/>
+        </svg>
+        Watch on YouTube
+      </div>
+    </div>
+    <span class="film-row-role">Copy</span>
+  </a>
+
+  <div class="section-header" id="print">
+    <span class="section-title">Print</span>
+    <span class="section-count">05 works</span>
+  </div>
+
+  <div class="print-note-row">
+    <p class="print-note-text">
+      Films are where I live. But print is where I learned to think — every word pulling its weight, 
+      nothing to hide behind. These are from a while back. The instinct hasn't gone anywhere.
+    </p>
+  </div>
+
+  <div class="print-grid">
+    <div class="print-card" onclick="openLightbox(this)">
+      <div class="print-card-inner"><span class="print-add">+</span><span class="print-num">01</span></div>
+      <!-- <img class="print-img" src="print1.jpg" alt=""> -->
+      <span class="print-caption">Brand · Campaign · Year</span>
+    </div>
+    <div class="print-card" onclick="openLightbox(this)">
+      <div class="print-card-inner"><span class="print-add">+</span><span class="print-num">02</span></div>
+      <!-- <img class="print-img" src="print2.jpg" alt=""> -->
+      <span class="print-caption">Brand · Campaign · Year</span>
+    </div>
+    <div class="print-card" onclick="openLightbox(this)">
+      <div class="print-card-inner"><span class="print-add">+</span><span class="print-num">03</span></div>
+      <!-- <img class="print-img" src="print3.jpg" alt=""> -->
+      <span class="print-caption">Brand · Campaign · Year</span>
+    </div>
+    <div class="print-card" onclick="openLightbox(this)">
+      <div class="print-card-inner"><span class="print-add">+</span><span class="print-num">04</span></div>
+      <!-- <img class="print-img" src="print4.jpg" alt=""> -->
+      <span class="print-caption">Brand · Campaign · Year</span>
+    </div>
+    <div class="print-card" onclick="openLightbox(this)">
+      <div class="print-card-inner"><span class="print-add">+</span><span class="print-num">05</span></div>
+      <!-- <img class="print-img" src="print5.jpg" alt=""> -->
+      <span class="print-caption">Brand · Campaign · Year</span>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">Close ✕</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <div class="section-header" id="about">
+    <span class="section-title">About</span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-left">
+      <h2 class="about-name">Vigi<span>— Copywriter</span></h2>
+      <div class="about-bio">
+        <p>Freelance copywriter based in Bangalore. I write advertising — mostly for films, occasionally for everything else. Years of pitching ideas in rooms, then making them survive cameras, clients, and reality.</p>
+        <p>I think in scripts. I chase the emotional logic of a brand and have opinions about pacing. Available for campaigns, brands, and conversations about why the second idea is usually the better one.</p>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="contact-block">
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-value"><a href="mailto:your@email.com">your@email.com</a></p>
+        </div>
+        <div>
+          <p class="contact-label">Based in</p>
+          <p class="contact-value">Bangalore, India</p>
+        </div>
+        <div>
+          <p class="contact-label">Available for</p>
+          <p class="contact-value">Freelance · Campaigns · Retainers</p>
+        </div>
+      </div>
+      <div class="availability">
+        <span class="avail-dot"></span>
+        Available for new work
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-l">Vigi — Advertising Copywriter</span>
+    <span class="footer-l">Bangalore · 2025</span>
+  </footer>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('.print-img');
+      if (!img) return;
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
