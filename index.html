@@ -97,7 +97,9 @@ body {
 
 .reel-thumb {
   width: 100%;
-  max-width: 1000px; /* 🔥 bigger visual */
+  max-width: 900px; 
+  aspect-ratio: 16/9;
+  object-fit: cover;/* 🔥 bigger visual */
 }
 
 /* PRINT */
@@ -107,10 +109,12 @@ body {
 }
 
 .print-desc {
-  max-width:650px;
-  margin-bottom:50px;
+  max-width:520px;
+  margin: 0 auto 60px auto;
   color:#444;
-  line-height:1.7;
+  line-height:1.8;
+  font-size:19px;
+  text-align: center;
 }
 
 /* BIGGER GRID */
