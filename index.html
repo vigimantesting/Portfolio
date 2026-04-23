@@ -21,23 +21,14 @@
 /* RESET */
 * { margin:0; padding:0; box-sizing:border-box; }
 
-/* BACKGROUND + TEXTURE */
+/* BASE */
 body {
   font-family: 'VigiText', sans-serif;
   color:#111;
   background: url('./bg.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
-}
-
-/* SOFT OVERLAY (IMPORTANT) */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(245, 242, 237, 0.88);
-  pointer-events: none;
+  background-color: #f5f2ed;
 }
 
 /* CONTAINER */
@@ -54,7 +45,7 @@ body::before {
   font-family: 'VigiDisplay', sans-serif;
 }
 
-/* SECTIONS */
+/* SECTION BASE */
 .section {
   min-height:100vh;
   display:flex;
@@ -95,16 +86,10 @@ body::before {
   line-height:1.6;
 }
 
-/* SHOWREEL (IMAGE LINK STYLE) */
+/* SHOWREEL */
 .reel-thumb {
   width: 100%;
   max-width: 900px;
-  cursor: pointer;
-  transition: transform 0.4s ease;
-}
-
-.reel-thumb:hover {
-  transform: scale(1.02);
 }
 
 /* PRINT */
@@ -134,6 +119,21 @@ body::before {
   width:100%;
   height:auto;
   object-fit:cover;
+}
+
+/* 🔥 INTERACTION (APPLIED EVERYWHERE) */
+.clickable {
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+}
+
+.clickable:active {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
 
 /* SMOOTH SCROLL */
@@ -167,7 +167,7 @@ html {
 <section class="section showreel">
   <h2>Showreel</h2>
 
-  <a href="https://www.youtube.com/playlist?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I" target="_blank">
+  <a href="https://www.youtube.com/playlist?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I" target="_blank" class="clickable">
     <img src="./showreel.jpg" class="reel-thumb">
   </a>
 
@@ -183,11 +183,11 @@ html {
   </p>
 
   <div class="print-grid">
-    <img src="./print/print1.png">
-    <img src="./print/print2.png">
-    <img src="./print/print3.jpg">
-    <img src="./print/print4.jpg">
-    <img src="./print/print5.png">
+    <img src="./print/print1.png" class="clickable">
+    <img src="./print/print2.png" class="clickable">
+    <img src="./print/print3.jpg" class="clickable">
+    <img src="./print/print4.jpg" class="clickable">
+    <img src="./print/print5.png" class="clickable">
   </div>
 
 </section>
