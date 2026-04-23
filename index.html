@@ -7,7 +7,7 @@
 
 <style>
 
-/* ✅ FONT FILES */
+/* FONTS */
 @font-face {
   font-family: 'VigiDisplay';
   src: url('./fonts/Trap-Black.otf') format('opentype');
@@ -21,39 +21,58 @@
 /* RESET */
 * { margin:0; padding:0; box-sizing:border-box; }
 
-/* BASE */
+/* BACKGROUND + TEXTURE */
 body {
   font-family: 'VigiText', sans-serif;
-  background:#f5f2ed;
   color:#111;
+  background: url('./bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* SOFT OVERLAY (IMPORTANT) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 242, 237, 0.88);
+  pointer-events: none;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* HEADINGS */
 .hero h1,
 .about h2,
-.print h2 {
+.print h2,
+.showreel h2 {
   font-family: 'VigiDisplay', sans-serif;
 }
 
-/* SECTION BASE */
+/* SECTIONS */
 .section {
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:60px 20px;
+  padding:80px 20px;
   text-align:center;
 }
 
 /* HERO */
 .hero h1 {
-  font-size: clamp(48px, 8vw, 120px);
+  font-size: clamp(48px, 8vw, 110px);
   letter-spacing:-0.02em;
 }
 
 .hero p {
-  margin-top:20px;
+  margin-top:16px;
   color:#666;
   font-size:18px;
 }
@@ -62,25 +81,30 @@ body {
 .about {
   align-items:flex-start;
   text-align:left;
-  max-width:800px;
+  max-width:700px;
 }
 
 .about h2 {
-  font-size:60px;
+  font-size:56px;
   margin-bottom:20px;
 }
 
 .about p {
-  margin-bottom:10px;
+  margin-bottom:12px;
   color:#444;
+  line-height:1.6;
 }
 
-/* SHOWREEL */
-.showreel iframe {
-  width: 90%;
+/* SHOWREEL (IMAGE LINK STYLE) */
+.reel-thumb {
+  width: 100%;
   max-width: 900px;
-  height: 600px; /* important so playlist is visible */
-  border: none;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.reel-thumb:hover {
+  transform: scale(1.02);
 }
 
 /* PRINT */
@@ -89,7 +113,7 @@ body {
 }
 
 .print h2 {
-  font-size:60px;
+  font-size:56px;
   margin-bottom:20px;
 }
 
@@ -101,9 +125,9 @@ body {
 
 .print-grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap:30px;
-  width:90%;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:24px;
+  width:100%;
 }
 
 .print-grid img {
@@ -121,6 +145,8 @@ html {
 </head>
 
 <body>
+
+<div class="container">
 
 <!-- HERO -->
 <section class="section hero">
@@ -141,16 +167,16 @@ html {
 <section class="section showreel">
   <h2>Showreel</h2>
 
- <iframe 
-  src="https://www.youtube.com/embed/YqwVOWYJSxw?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I"
-  allowfullscreen>
-</iframe>
+  <a href="https://www.youtube.com/playlist?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I" target="_blank">
+    <img src="./showreel.jpg" class="reel-thumb">
+  </a>
 
 </section>
 
 <!-- PRINT -->
 <section class="section print">
   <h2>Print</h2>
+
   <p class="print-desc">
     Have mostly been hired for TVCs, DVCs, sketches and films but am itching to go back to print. 
     Here is a small portion of work.
@@ -163,7 +189,10 @@ html {
     <img src="./print/print4.jpg">
     <img src="./print/print5.png">
   </div>
+
 </section>
+
+</div>
 
 </body>
 </html>
