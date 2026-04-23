@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vignesh Raja</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background:#f5f2ed;
+  color:#111;
+}
+
+/* SECTION BASE */
+.section {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px 20px;
+  text-align:center;
+}
+
+/* HERO */
+.hero h1 {
+  font-size: clamp(48px, 8vw, 120px);
+  letter-spacing:-0.02em;
+}
+
+.hero p {
+  margin-top:20px;
+  color:#666;
+  font-size:18px;
+}
+
+/* ABOUT */
+.about {
+  align-items:flex-start;
+  text-align:left;
+  max-width:800px;
+}
+
+.about h2 {
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.about p {
+  margin-bottom:10px;
+  color:#444;
+}
+
+/* SHOWREEL */
+.showreel iframe {
+  width:90%;
+  max-width:900px;
+  aspect-ratio:16/9;
+  border:none;
+}
+
+/* PRINT */
+.print {
+  width:100%;
+}
+
+.print h2 {
+  font-size:60px;
+  margin-bottom:20px;
+}
+
+.print-desc {
+  max-width:600px;
+  margin-bottom:40px;
+  color:#444;
+}
+
+.print-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap:30px;
+  width:90%;
+}
+
+.print-grid img {
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
+/* OPTIONAL SMOOTH SCROLL */
+html {
+  scroll-behavior:smooth;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="section hero">
+  <h1>VIGNESH RAJA</h1>
+  <p>Copywriter</p>
+  <p>Screenwriter</p>
+</section>
+
+<!-- ABOUT -->
+<section class="section about">
+  <h2>About</h2>
+  <p><strong>Act 1:</strong> Ogilvy, Mudra, Dentsu, AIB</p>
+  <p><strong>Act 2a:</strong> Screenwriting in Tamil</p>
+  <p><strong>Act 2b:</strong> Very Multimedia, Moonshot, One Hand Clap</p>
+</section>
+
+<!-- SHOWREEL -->
+<section class="section showreel">
+  <h2>Showreel</h2>
+  <iframe 
+    src="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID"
+    allowfullscreen>
+  </iframe>
+</section>
+
+<!-- PRINT -->
+<section class="section print">
+  <h2>Print</h2>
+  <p class="print-desc">
+    Have mostly been hired for TVCs, DVCs, sketches and films but am itching to go back to print. 
+    Here is a small portion of work.
+  </p>
+
+  <div class="print-grid">
+    <img src="./print/print1.jpg">
+    <img src="./print/print2.jpg">
+    <img src="./print/print3.jpg">
+    <img src="./print/print4.jpg">
+    <img src="./print/print5.jpg">
+  </div>
+</section>
+
+</body>
+</html>
