@@ -7,7 +7,7 @@
 
 <style>
 
-/* ✅ FONT FILES MUST BE INSIDE STYLE */
+/* ✅ FONT FILES */
 @font-face {
   font-family: 'VigiDisplay';
   src: url('./fonts/Trap-Black.otf') format('opentype');
@@ -28,7 +28,7 @@ body {
   color:#111;
 }
 
-/* HEADINGS USE DISPLAY FONT */
+/* HEADINGS */
 .hero h1,
 .about h2,
 .print h2 {
@@ -77,10 +77,10 @@ body {
 
 /* SHOWREEL */
 .showreel iframe {
-  width:90%;
-  max-width:900px;
-  aspect-ratio:16/9;
-  border:none;
+  width: 90%;
+  max-width: 900px;
+  height: 600px; /* important so playlist is visible */
+  border: none;
 }
 
 /* PRINT */
@@ -140,10 +140,12 @@ html {
 <!-- SHOWREEL -->
 <section class="section showreel">
   <h2>Showreel</h2>
-<iframe 
-  src="https://www.youtube.com/embed/videoseries?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I"
-  allowfullscreen>
-</iframe>
+
+  <iframe 
+    src="https://www.youtube.com/embed/videoseries?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I"
+    allowfullscreen>
+  </iframe>
+
 </section>
 
 <!-- PRINT -->
