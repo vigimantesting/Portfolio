@@ -24,7 +24,8 @@
 /* BASE */
 body {
   font-family: 'VigiText', sans-serif;
-  color:#111;
+  font-size: 20px; /* 🔥 increased body text */
+  color:#0f0f0f;
   background: url('./bg.jpg');
   background-size: cover;
   background-position: center;
@@ -33,7 +34,7 @@ body {
 
 /* CONTAINER */
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -47,71 +48,76 @@ body {
 
 /* SECTION BASE */
 .section {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:80px 20px;
-  text-align:center;
+  min-height: auto;
+  padding: 100px 20px;
+  text-align: center;
 }
 
 /* HERO */
+.hero {
+  padding-top: 140px;
+  padding-bottom: 40px; /* 🔥 reduced gap */
+}
+
 .hero h1 {
-  font-size: clamp(48px, 8vw, 110px);
-  letter-spacing:-0.02em;
+  font-size: clamp(60px, 8vw, 120px);
+  letter-spacing:-0.03em;
 }
 
 .hero p {
-  margin-top:16px;
-  color:#666;
-  font-size:18px;
+  margin-top: 8px;
+  color:#555;
+  font-size:20px;
 }
 
 /* ABOUT */
 .about {
-  align-items:flex-start;
-  text-align:left;
   max-width:700px;
+  margin: 0 auto;
+  padding-top: 20px; /* 🔥 tighter */
+  text-align:left;
 }
 
 .about h2 {
-  font-size:56px;
-  margin-bottom:20px;
+  font-size:54px;
+  margin-bottom:16px;
 }
 
 .about p {
   margin-bottom:12px;
   color:#444;
-  line-height:1.6;
+  line-height:1.7;
 }
 
 /* SHOWREEL */
+.showreel h2 {
+  font-size: 68px; /* 🔥 bigger */
+  margin-bottom: 50px;
+}
+
 .reel-thumb {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px; /* 🔥 bigger visual */
 }
 
 /* PRINT */
-.print {
-  width:100%;
-}
-
 .print h2 {
-  font-size:56px;
+  font-size:58px;
   margin-bottom:20px;
 }
 
 .print-desc {
-  max-width:600px;
-  margin-bottom:40px;
+  max-width:650px;
+  margin-bottom:50px;
   color:#444;
+  line-height:1.7;
 }
 
+/* BIGGER GRID */
 .print-grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap:24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap:32px;
   width:100%;
 }
 
@@ -121,14 +127,14 @@ body {
   object-fit:cover;
 }
 
-/* 🔥 INTERACTION (APPLIED EVERYWHERE) */
+/* INTERACTION */
 .clickable {
   cursor: pointer;
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
 
 .clickable:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .clickable:active {
