@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vignesh Raja</title>
+
+<style>
+
+/* ✅ FONT FILES MUST BE INSIDE STYLE */
 @font-face {
   font-family: 'VigiDisplay';
   src: url('./fonts/Trap-Black.otf') format('opentype');
@@ -13,19 +17,22 @@
   font-family: 'VigiText';
   src: url('./fonts/Trap-Light.otf') format('opentype');
 }
-<style>
-  .hero h1,
+
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* BASE */
+body {
+  font-family: 'VigiText', sans-serif;
+  background:#f5f2ed;
+  color:#111;
+}
+
+/* HEADINGS USE DISPLAY FONT */
+.hero h1,
 .about h2,
 .print h2 {
   font-family: 'VigiDisplay', sans-serif;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: VigiText, sans-serif;
-  background:#f5f2ed;
-  color:#111;
 }
 
 /* SECTION BASE */
@@ -105,10 +112,11 @@ body {
   object-fit:cover;
 }
 
-/* OPTIONAL SMOOTH SCROLL */
+/* SMOOTH SCROLL */
 html {
   scroll-behavior:smooth;
 }
+
 </style>
 </head>
 
