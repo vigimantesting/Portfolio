@@ -24,7 +24,7 @@
 /* BASE */
 body {
   font-family: 'VigiText', sans-serif;
-  font-size: 20px; /* 🔥 increased body text */
+  font-size: 20px;
   color:#0f0f0f;
   background: url('./bg.jpg');
   background-size: cover;
@@ -42,7 +42,8 @@ body {
 .hero h1,
 .about h2,
 .print h2,
-.showreel h2 {
+.showreel h2,
+.contact h2 {
   font-family: 'VigiDisplay', sans-serif;
 }
 
@@ -56,7 +57,7 @@ body {
 /* HERO */
 .hero {
   padding-top: 140px;
-  padding-bottom: 40px; /* 🔥 reduced gap */
+  padding-bottom: 40px;
 }
 
 .hero h1 {
@@ -74,7 +75,7 @@ body {
 .about {
   max-width:700px;
   margin: 0 auto;
-  padding-top: 20px; /* 🔥 tighter */
+  padding-top: 20px;
   text-align:left;
 }
 
@@ -91,44 +92,72 @@ body {
 
 /* SHOWREEL */
 .showreel h2 {
-  font-size: 68px; /* 🔥 bigger */
+  font-size: 68px;
   margin-bottom: 50px;
 }
 
 .reel-thumb {
   width: 100%;
-  max-width: 900px; 
-  aspect-ratio: 16/9;
-  object-fit: cover;/* 🔥 bigger visual */
+  max-width: 900px;
+  margin: 0 auto;
+  display: block;
 }
 
 /* PRINT */
 .print h2 {
   font-size:58px;
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
 
 .print-desc {
-  max-width:520px;
+  max-width: 520px;
   margin: 0 auto 60px auto;
-  color:#444;
-  line-height:1.8;
-  font-size:19px;
-  text-align: center;
+  color: #444;
+  line-height: 1.8;
+  font-size: 19px;
+  text-align: left;
 }
 
-/* BIGGER GRID */
+/* 🔥 GRID FIX */
 .print-grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap:32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap:28px;
   width:100%;
 }
 
+/* NORMAL IMAGES */
 .print-grid img {
   width:100%;
   height:auto;
   object-fit:cover;
+}
+
+/* 🔥 BIG LANDSCAPE IMAGE (print5) */
+.print-grid img:nth-child(5) {
+  grid-column: span 3;
+}
+
+/* CONTACT */
+.contact h2 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.contact-text {
+  max-width: 520px;
+  margin: 0 auto 30px auto;
+  color: #444;
+  line-height: 1.7;
+}
+
+.contact-link {
+  font-family: 'VigiDisplay';
+  font-size: 28px;
+  text-decoration: none;
+  color: #111;
+  border-bottom: 1px solid #111;
+  padding-bottom: 4px;
 }
 
 /* INTERACTION */
@@ -144,6 +173,17 @@ body {
 .clickable:active {
   transform: scale(0.97);
   opacity: 0.9;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+  .print-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .print-grid img:nth-child(5) {
+    grid-column: span 1;
+  }
 }
 
 /* SMOOTH SCROLL */
@@ -170,7 +210,7 @@ html {
   <h2>About</h2>
   <p><strong>Act 1:</strong> Ogilvy, Mudra, Dentsu, AIB</p>
   <p><strong>Act 2a:</strong> Screenwriting in Tamil</p>
-  <p><strong>Act 2b:</strong> Very Multimedia, Moonshot, One Hand Clap <'insert your agency name'> </p>
+  <p><strong>Act 2b:</strong> Very Multimedia, Moonshot, One Hand Clap</p>
 </section>
 
 <!-- SHOWREEL -->
@@ -180,7 +220,6 @@ html {
   <a href="https://www.youtube.com/playlist?list=PLUKEX6tuPw8dvjrxp9_Mpe31BIULUrL4I" target="_blank" class="clickable">
     <img src="./showreel.jpg" class="reel-thumb">
   </a>
-
 </section>
 
 <!-- PRINT -->
@@ -189,17 +228,29 @@ html {
 
   <p class="print-desc">
     Have mostly been hired for TVCs, DVCs, sketches and films but am itching to go back to print. 
-    Here is a small portion of work from the past.
+    Here is a small portion of work.
   </p>
 
   <div class="print-grid">
     <img src="./print/print1.png" class="clickable">
     <img src="./print/print2.png" class="clickable">
     <img src="./print/print3.jpg" class="clickable">
-    <img src="./print/print5.png" class="clickable">
     <img src="./print/print4.jpg" class="clickable">
+    <img src="./print/print5.png" class="clickable">
   </div>
+</section>
 
+<!-- CONTACT -->
+<section class="section contact">
+  <h2>Contact</h2>
+
+  <p class="contact-text">
+    Open to projects, scripts, campaigns and conversations.
+  </p>
+
+  <a href="mailto:your@email.com" class="contact-link clickable">
+    your@email.com
+  </a>
 </section>
 
 </div>
